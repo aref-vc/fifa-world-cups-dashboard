@@ -161,7 +161,7 @@ function initGoals() {
 
   const lolliWidth = (width / 2) - 20;
   const lolliHeight = 400;
-  const lolliMargin = { top: 50, right: 40, bottom: 20, left: 180 };
+  const lolliMargin = { top: 50, right: 40, bottom: 20, left: 220 };
   const lolliInnerWidth = lolliWidth - lolliMargin.left - lolliMargin.right;
   const lolliInnerHeight = lolliHeight - lolliMargin.top - lolliMargin.bottom;
 
