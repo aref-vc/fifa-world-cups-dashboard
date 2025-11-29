@@ -464,6 +464,16 @@ section.animate .stat-card:nth-child(4) { transition-delay: 0.4s; }
   text-shadow: 0 0 20px currentColor;
 }
 
+/* Hero stat cards */
+.hero-stat-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
 /* SVG path draw animation helper */
 .draw-path {
   stroke-dasharray: 1000;
