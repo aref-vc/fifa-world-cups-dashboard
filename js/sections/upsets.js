@@ -96,7 +96,7 @@ function initUpsets() {
 
   const width = (container.clientWidth / 2) - 40 || 500;
   const height = 450;
-  const margin = { top: 40, right: 30, bottom: 20, left: 160 };
+  const margin = { top: 40, right: 30, bottom: 20, left: 200 };
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
@@ -185,13 +185,13 @@ function initUpsets() {
     .attr('font-size', '10px')
     .text(d => `${d.winner} vs ${d.loser} '${String(d.year).slice(2)}`);
 
-  // Knockout indicator dots
+  // Knockout indicator dots - positioned just before the labels
   g.selectAll('.knockout-dot')
     .data(topUpsets.filter(d => d.isKnockout))
     .enter()
     .append('circle')
     .attr('class', 'knockout-dot')
-    .attr('cx', -150)
+    .attr('cx', -190)
     .attr('cy', d => {
       const idx = topUpsets.indexOf(d);
       return y(idx) + y.bandwidth() / 2;
