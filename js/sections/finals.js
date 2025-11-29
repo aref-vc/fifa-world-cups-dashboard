@@ -44,7 +44,7 @@ function initFinals() {
     .attr('text-anchor', 'middle')
     .attr('fill', Utils.colors.textSecondary)
     .attr('font-size', '14px')
-    .attr('font-weight', '600')
+    .style('font-weight', 'bold')
     .text('WORLD CUP FINALS TIMELINE (1930-2022)');
 
   // X scale for years
@@ -219,7 +219,7 @@ function initFinals() {
     .attr('text-anchor', 'middle')
     .attr('fill', Utils.colors.textSecondary)
     .attr('font-size', '14px')
-    .attr('font-weight', '600')
+    .style('font-weight', 'bold')
     .text('FINAL COMPETITIVENESS');
 
   // Scales

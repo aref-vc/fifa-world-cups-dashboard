@@ -178,7 +178,7 @@ function initDominance() {
     .attr('text-anchor', 'middle')
     .attr('fill', Utils.colors.textSecondary)
     .attr('font-size', '14px')
-    .attr('font-weight', '600')
+    .style('font-weight', 'bold')
     .text('DYNASTY RANKINGS (TOP 10 NATIONS ALL-TIME)');
 
   // Legend - bottom center with circles

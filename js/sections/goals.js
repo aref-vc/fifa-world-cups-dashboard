@@ -148,7 +148,7 @@ function initGoals() {
     .attr('text-anchor', 'middle')
     .attr('fill', Utils.colors.textSecondary)
     .attr('font-size', '14px')
-    .attr('font-weight', '600')
+    .style('font-weight', 'bold')
     .text('AVG GOALS BY DECADE & STAGE');
 
   // ============================================
@@ -256,6 +256,6 @@ function initGoals() {
     .attr('text-anchor', 'middle')
     .attr('fill', Utils.colors.textSecondary)
     .attr('font-size', '14px')
-    .attr('font-weight', '600')
+    .style('font-weight', 'bold')
     .text('HIGHEST SCORING MATCHES');
 }

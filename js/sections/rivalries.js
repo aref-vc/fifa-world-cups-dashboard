@@ -77,7 +77,7 @@ function initRivalries() {
     .attr('text-anchor', 'middle')
     .attr('fill', Utils.colors.textSecondary)
     .attr('font-size', '14px')
-    .attr('font-weight', '600')
+    .style('font-weight', 'bold')
     .text('RIVALRY NETWORK (TOP 20 MATCHUPS)');
 
   const netG = netSvg.append('g')

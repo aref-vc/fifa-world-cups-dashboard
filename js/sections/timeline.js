@@ -196,7 +196,7 @@ function initTimeline() {
     .attr('text-anchor', 'middle')
     .attr('fill', Utils.colors.textSecondary)
     .attr('font-size', '14px')
-    .attr('font-weight', '600')
+    .style('font-weight', 'bold')
     .text('TOURNAMENT EVOLUTION (1930-2022)');
 
   // Legend - bottom center with circles

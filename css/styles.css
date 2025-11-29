@@ -238,10 +238,10 @@ svg text {
 }
 
 /* Chart titles - bold uppercase */
-svg .chart-title {
-  font-weight: 600 !important;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+svg text.chart-title {
+  font-weight: 700 !important;
+  font-style: normal;
+  letter-spacing: 0.08em;
 }
 
 /* ============================================

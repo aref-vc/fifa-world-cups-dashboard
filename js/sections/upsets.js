@@ -116,7 +116,7 @@ function initUpsets() {
     .attr('text-anchor', 'middle')
     .attr('fill', Utils.colors.textSecondary)
     .attr('font-size', '14px')
-    .attr('font-weight', '600')
+    .style('font-weight', 'bold')
     .text('TOP 15 GIANT-KILLING VICTORIES');
 
   // Scales
