@@ -38,9 +38,12 @@ const Utils = {
     text: '#FFFFE3',
     textSecondary: '#E6E6CE',
     textTertiary: '#B3B3A3',
+    bgMain: '#10100E',
     bg: '#10100E',
     bgElevated: '#1A1A18',
-    border: '#2A2A28'
+    bgAccent: '#242422',
+    border: '#2A2A28',
+    borderLight: '#3A3A38'
   },
 
   // Chart color scales

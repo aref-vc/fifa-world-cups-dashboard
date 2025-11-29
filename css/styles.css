@@ -306,17 +306,73 @@ section:last-of-type {
 .bg-coral { background-color: var(--coral); }
 
 /* ============================================
-   Animations
+   Animations & Transitions
    ============================================ */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* Section reveal on scroll */
+section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+section.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero section - no initial hide */
+section#hero {
+  opacity: 1;
+  transform: none;
 }
 
 .animate-in {
@@ -332,6 +388,109 @@ section:last-of-type {
 .stagger.animate > *:nth-child(2) { animation: fadeInUp 0.5s ease-out 0.2s forwards; }
 .stagger.animate > *:nth-child(3) { animation: fadeInUp 0.5s ease-out 0.3s forwards; }
 .stagger.animate > *:nth-child(4) { animation: fadeInUp 0.5s ease-out 0.4s forwards; }
+.stagger.animate > *:nth-child(5) { animation: fadeInUp 0.5s ease-out 0.5s forwards; }
+.stagger.animate > *:nth-child(6) { animation: fadeInUp 0.5s ease-out 0.6s forwards; }
+.stagger.animate > *:nth-child(7) { animation: fadeInUp 0.5s ease-out 0.7s forwards; }
+.stagger.animate > *:nth-child(8) { animation: fadeInUp 0.5s ease-out 0.8s forwards; }
+
+/* Chart container fade in */
+.chart-container {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out 0.2s, transform 0.6s ease-out 0.2s;
+}
+
+section.animate .chart-container {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Section header slide in */
+.section-header {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+section.animate .section-header {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Card hover effects */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  border-color: var(--border-light);
+}
+
+/* Stat card pulse on reveal */
+.stat-card {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+section.animate .stat-card {
+  opacity: 1;
+  transform: scale(1);
+}
+
+section.animate .stat-card:nth-child(1) { transition-delay: 0.1s; }
+section.animate .stat-card:nth-child(2) { transition-delay: 0.2s; }
+section.animate .stat-card:nth-child(3) { transition-delay: 0.3s; }
+section.animate .stat-card:nth-child(4) { transition-delay: 0.4s; }
+
+/* Stat value glow on hover */
+.stat-card:hover .stat-value {
+  text-shadow: 0 0 20px currentColor;
+}
+
+/* SVG path draw animation helper */
+.draw-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 2s ease-out;
+}
+
+section.animate .draw-path {
+  stroke-dashoffset: 0;
+}
+
+/* Loading shimmer for charts */
+.loading-shimmer {
+  background: linear-gradient(90deg,
+    var(--bg-elevated) 25%,
+    var(--bg-accent) 50%,
+    var(--bg-elevated) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Nav link underline animation */
+.nav-links a {
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--lime);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
 
 /* ============================================
    Scrollbar
