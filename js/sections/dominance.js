@@ -57,8 +57,8 @@ function initDominance() {
 
   // Dimensions
   const width = container.clientWidth || 1200;
-  const height = 550;
-  const margin = { top: 40, right: 150, bottom: 60, left: 60 };
+  const height = 600;
+  const margin = { top: 40, right: 40, bottom: 100, left: 60 };
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
@@ -181,14 +181,22 @@ function initDominance() {
     .style('font-weight', 'bold')
     .text('DYNASTY RANKINGS (TOP 10 NATIONS ALL-TIME)');
 
-  // Legend - bottom center with circles
+  // Legend - bottom center with circles (2 rows of 5)
+  const itemsPerRow = 5;
+  const itemWidth = 140;
+  const rowHeight = 20;
+  const legendWidth = itemsPerRow * itemWidth;
+
   const legend = svg.append('g')
-    .attr('transform', `translate(${width / 2 - (topTeams.length * 60) / 2}, ${height - 15})`);
+    .attr('transform', `translate(${(width - legendWidth) / 2}, ${height - 55})`);
 
   topTeams.forEach((team, i) => {
     const totalWins = teamTotalWins[team];
+    const row = Math.floor(i / itemsPerRow);
+    const col = i % itemsPerRow;
+
     const legendItem = legend.append('g')
-      .attr('transform', `translate(${i * 120}, 0)`);
+      .attr('transform', `translate(${col * itemWidth}, ${row * rowHeight})`);
 
     legendItem.append('circle')
       .attr('cx', 0)
@@ -197,10 +205,10 @@ function initDominance() {
       .attr('fill', color(team));
 
     legendItem.append('text')
-      .attr('x', 10)
+      .attr('x', 12)
       .attr('y', 4)
       .attr('fill', Utils.colors.textSecondary)
-      .attr('font-size', '10px')
+      .attr('font-size', '11px')
       .text(`${team} (${totalWins})`);
   });
 }
