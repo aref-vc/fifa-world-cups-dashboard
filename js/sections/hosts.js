@@ -8,7 +8,7 @@ function initHosts() {
 
   container.innerHTML = '';
 
-  // Create layout: stats cards on top, dot plot below
+  // Create layout: stats cards on top, then two-column charts below
   const wrapper = document.createElement('div');
   wrapper.style.display = 'flex';
   wrapper.style.flexDirection = 'column';
@@ -50,13 +50,28 @@ function initHosts() {
   });
 
   // ============================================
-  // Connected Dot Plot - Host Performance
+  // Two-column chart layout
   // ============================================
-  const chartContainer = document.createElement('div');
-  wrapper.appendChild(chartContainer);
+  const chartsWrapper = document.createElement('div');
+  chartsWrapper.style.display = 'grid';
+  chartsWrapper.style.gridTemplateColumns = '2fr 1fr';
+  chartsWrapper.style.gap = '40px';
+  chartsWrapper.style.alignItems = 'start';
+  wrapper.appendChild(chartsWrapper);
 
-  const width = container.clientWidth || 1200;
-  const height = 700;
+  // Left: Dot plot container
+  const chartContainer = document.createElement('div');
+  chartsWrapper.appendChild(chartContainer);
+
+  // Right: Donut chart container
+  const donutContainer = document.createElement('div');
+  chartsWrapper.appendChild(donutContainer);
+
+  // ============================================
+  // LEFT: Connected Dot Plot - Host Performance
+  // ============================================
+  const width = (container.clientWidth * 0.63) || 800;
+  const height = 600;
   const margin = { top: 60, right: 40, bottom: 80, left: 130 };
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
@@ -247,5 +262,147 @@ function initHosts() {
       .attr('fill', Utils.colors.textSecondary)
       .attr('font-size', '11px')
       .text(item.label);
+  });
+
+  // ============================================
+  // RIGHT: Host Results Breakdown - Donut Chart
+  // ============================================
+  const donutWidth = (container.clientWidth * 0.32) || 350;
+  const donutHeight = 380;
+  const donutRadius = Math.min(donutWidth - 40, donutHeight - 120) / 2;
+
+  // Aggregate all host results
+  const totalWins = hostData.reduce((sum, h) => sum + h.wins, 0);
+  const totalDraws = hostData.reduce((sum, h) => sum + h.draws, 0);
+  const totalLosses = hostData.reduce((sum, h) => sum + h.losses, 0);
+  const totalMatches = totalWins + totalDraws + totalLosses;
+
+  const resultData = [
+    { label: 'Wins', value: totalWins, color: Utils.colors.lime },
+    { label: 'Draws', value: totalDraws, color: Utils.colors.amber },
+    { label: 'Losses', value: totalLosses, color: Utils.colors.coral }
+  ];
+
+  const donutSvg = d3.select(donutContainer)
+    .append('svg')
+    .attr('width', donutWidth)
+    .attr('height', donutHeight);
+
+  // Title
+  donutSvg.append('text')
+    .attr('class', 'chart-title')
+    .attr('x', donutWidth / 2)
+    .attr('y', 25)
+    .attr('text-anchor', 'middle')
+    .attr('fill', Utils.colors.textSecondary)
+    .attr('font-size', '14px')
+    .style('font-weight', 'bold')
+    .text('HOST RESULTS BREAKDOWN');
+
+  const donutG = donutSvg.append('g')
+    .attr('transform', `translate(${donutWidth / 2}, ${donutHeight / 2 + 10})`);
+
+  // Pie generator
+  const pie = d3.pie()
+    .value(d => d.value)
+    .sort(null)
+    .padAngle(0.02);
+
+  // Arc generator
+  const arc = d3.arc()
+    .innerRadius(donutRadius * 0.6)
+    .outerRadius(donutRadius);
+
+  const arcHover = d3.arc()
+    .innerRadius(donutRadius * 0.6)
+    .outerRadius(donutRadius * 1.08);
+
+  // Draw arcs
+  const arcs = donutG.selectAll('.arc')
+    .data(pie(resultData))
+    .enter()
+    .append('g')
+    .attr('class', 'arc');
+
+  arcs.append('path')
+    .attr('d', arc)
+    .attr('fill', d => d.data.color)
+    .attr('stroke', Utils.colors.bgMain)
+    .attr('stroke-width', 2)
+    .style('cursor', 'pointer')
+    .on('mouseenter', function(event, d) {
+      d3.select(this)
+        .transition()
+        .duration(200)
+        .attr('d', arcHover);
+      const pct = ((d.data.value / totalMatches) * 100).toFixed(1);
+      Utils.showTooltip(`
+        <div class="tooltip-title" style="color: ${d.data.color}">${d.data.label}</div>
+        <div>${d.data.value} matches (${pct}%)</div>
+      `, event.pageX, event.pageY);
+    })
+    .on('mouseleave', function() {
+      d3.select(this)
+        .transition()
+        .duration(200)
+        .attr('d', arc);
+      Utils.hideTooltip();
+    });
+
+  // Center text - total matches
+  donutG.append('text')
+    .attr('text-anchor', 'middle')
+    .attr('dominant-baseline', 'middle')
+    .attr('y', -10)
+    .attr('fill', Utils.colors.text)
+    .attr('font-size', '32px')
+    .style('font-weight', '600')
+    .text(totalMatches);
+
+  donutG.append('text')
+    .attr('text-anchor', 'middle')
+    .attr('dominant-baseline', 'middle')
+    .attr('y', 18)
+    .attr('fill', Utils.colors.textTertiary)
+    .attr('font-size', '11px')
+    .text('TOTAL MATCHES');
+
+  // Legend below donut - moved further down
+  const donutLegend = donutSvg.append('g')
+    .attr('transform', `translate(${donutWidth / 2 - 80}, ${donutHeight - 15})`);
+
+  resultData.forEach((item, i) => {
+    const pct = ((item.value / totalMatches) * 100).toFixed(0);
+
+    donutLegend.append('circle')
+      .attr('cx', i * 60)
+      .attr('cy', 0)
+      .attr('r', 5)
+      .attr('fill', item.color);
+
+    donutLegend.append('text')
+      .attr('x', i * 60 + 10)
+      .attr('y', 4)
+      .attr('fill', Utils.colors.textSecondary)
+      .attr('font-size', '10px')
+      .text(`${pct}%`);
+  });
+
+  // Add result breakdown stat cards below donut
+  const breakdownDiv = document.createElement('div');
+  breakdownDiv.style.display = 'flex';
+  breakdownDiv.style.justifyContent = 'space-around';
+  breakdownDiv.style.marginTop = '20px';
+  breakdownDiv.style.padding = '0 10px';
+  donutContainer.appendChild(breakdownDiv);
+
+  resultData.forEach(item => {
+    const statDiv = document.createElement('div');
+    statDiv.style.textAlign = 'center';
+    statDiv.innerHTML = `
+      <div style="font-size: 1.5rem; font-weight: 600; color: ${item.color};">${item.value}</div>
+      <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: ${Utils.colors.textTertiary};">${item.label}</div>
+    `;
+    breakdownDiv.appendChild(statDiv);
   });
 }

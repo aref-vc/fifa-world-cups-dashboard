@@ -6,18 +6,35 @@ function initTimeline() {
 
   const tournaments = DATA.tournaments;
 
-  // Dimensions
-  const width = container.clientWidth || 1200;
-  const height = 500;
-  const margin = { top: 40, right: 120, bottom: 80, left: 60 };
+  // Clear container and create wrapper
+  container.innerHTML = '';
+
+  const wrapper = document.createElement('div');
+  wrapper.style.display = 'grid';
+  wrapper.style.gridTemplateColumns = '2fr 1fr';
+  wrapper.style.gap = '40px';
+  wrapper.style.alignItems = 'start';
+  container.appendChild(wrapper);
+
+  // Left: Area chart container
+  const areaContainer = document.createElement('div');
+  wrapper.appendChild(areaContainer);
+
+  // Right: Decade breakdown container
+  const decadeContainer = document.createElement('div');
+  wrapper.appendChild(decadeContainer);
+
+  // ============================================
+  // LEFT: Area Chart - Tournament Evolution
+  // ============================================
+  const width = (container.clientWidth * 0.63) || 800;
+  const height = 450;
+  const margin = { top: 50, right: 60, bottom: 80, left: 60 };
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
-  // Clear container
-  container.innerHTML = '';
-
   // Create SVG
-  const svg = d3.select(container)
+  const svg = d3.select(areaContainer)
     .append('svg')
     .attr('width', width)
     .attr('height', height);
@@ -255,4 +272,128 @@ function initTimeline() {
       .attr('font-size', '10px')
       .text(a.text);
   });
+
+  // ============================================
+  // RIGHT: Decade Stats - Horizontal Bars
+  // ============================================
+
+  // Calculate stats by decade
+  const decadeStats = {};
+  DATA.matches.forEach(m => {
+    const decade = m.decade;
+    if (!decadeStats[decade]) {
+      decadeStats[decade] = { goals: 0, matches: 0, tournaments: new Set() };
+    }
+    decadeStats[decade].goals += m.totalGoals;
+    decadeStats[decade].matches++;
+    decadeStats[decade].tournaments.add(m.year);
+  });
+
+  const decades = Object.keys(decadeStats).sort().map(d => ({
+    decade: d,
+    goals: decadeStats[d].goals,
+    matches: decadeStats[d].matches,
+    tournaments: decadeStats[d].tournaments.size,
+    avgGoals: (decadeStats[d].goals / decadeStats[d].matches).toFixed(2)
+  }));
+
+  const decWidth = (container.clientWidth * 0.32) || 350;
+  const decHeight = 450;
+  const decMargin = { top: 50, right: 30, bottom: 40, left: 70 };
+  const decInnerWidth = decWidth - decMargin.left - decMargin.right;
+  const decInnerHeight = decHeight - decMargin.top - decMargin.bottom;
+
+  const decSvg = d3.select(decadeContainer)
+    .append('svg')
+    .attr('width', decWidth)
+    .attr('height', decHeight);
+
+  const decG = decSvg.append('g')
+    .attr('transform', `translate(${decMargin.left},${decMargin.top})`);
+
+  // Title
+  decSvg.append('text')
+    .attr('class', 'chart-title')
+    .attr('x', decWidth / 2)
+    .attr('y', 25)
+    .attr('text-anchor', 'middle')
+    .attr('fill', Utils.colors.textSecondary)
+    .attr('font-size', '14px')
+    .style('font-weight', 'bold')
+    .text('GOALS BY DECADE');
+
+  // Scales
+  const yDec = d3.scaleBand()
+    .domain(decades.map(d => d.decade))
+    .range([0, decInnerHeight])
+    .padding(0.3);
+
+  const xDec = d3.scaleLinear()
+    .domain([0, d3.max(decades, d => d.goals)])
+    .range([0, decInnerWidth]);
+
+  // Background bars (total capacity feel)
+  decG.selectAll('.bg-bar')
+    .data(decades)
+    .enter()
+    .append('rect')
+    .attr('x', 0)
+    .attr('y', d => yDec(d.decade))
+    .attr('width', decInnerWidth)
+    .attr('height', yDec.bandwidth())
+    .attr('fill', Utils.colors.bgAccent)
+    .attr('rx', 4);
+
+  // Goal bars
+  decG.selectAll('.goal-bar')
+    .data(decades)
+    .enter()
+    .append('rect')
+    .attr('x', 0)
+    .attr('y', d => yDec(d.decade))
+    .attr('width', d => xDec(d.goals))
+    .attr('height', yDec.bandwidth())
+    .attr('fill', (d, i) => {
+      const colors = [Utils.colors.cyan, Utils.colors.lime, Utils.colors.amber, Utils.colors.emerald, Utils.colors.coral];
+      return colors[i % colors.length];
+    })
+    .attr('rx', 4)
+    .attr('opacity', 0.8)
+    .style('cursor', 'pointer')
+    .on('mouseenter', function(event, d) {
+      d3.select(this).attr('opacity', 1);
+      Utils.showTooltip(`
+        <div class="tooltip-title">${d.decade}s</div>
+        <div>Total Goals: <span style="color: ${Utils.colors.lime}">${d.goals}</span></div>
+        <div>Matches: <span style="color: ${Utils.colors.cyan}">${d.matches}</span></div>
+        <div>Tournaments: <span style="color: ${Utils.colors.amber}">${d.tournaments}</span></div>
+        <div>Avg Goals/Match: <span style="color: ${Utils.colors.emerald}">${d.avgGoals}</span></div>
+      `, event.pageX, event.pageY);
+    })
+    .on('mouseleave', function() {
+      d3.select(this).attr('opacity', 0.8);
+      Utils.hideTooltip();
+    });
+
+  // Goal count labels
+  decG.selectAll('.goal-label')
+    .data(decades)
+    .enter()
+    .append('text')
+    .attr('x', d => xDec(d.goals) + 8)
+    .attr('y', d => yDec(d.decade) + yDec.bandwidth() / 2)
+    .attr('dominant-baseline', 'middle')
+    .attr('fill', Utils.colors.textSecondary)
+    .attr('font-size', '11px')
+    .text(d => d.goals);
+
+  // Y Axis - decades
+  const yDecAxis = decG.append('g')
+    .call(d3.axisLeft(yDec).tickFormat(d => `${d}s`));
+
+  yDecAxis.selectAll('text')
+    .attr('fill', Utils.colors.textSecondary)
+    .attr('font-size', '11px');
+
+  yDecAxis.selectAll('line, path').attr('stroke', Utils.colors.border);
 }
