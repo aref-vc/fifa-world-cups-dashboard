@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FIFA World Cup Dashboard | 1930-2022</title>
+  <meta name="description" content="Visual analysis of 964 FIFA World Cup matches across 92 years of football history.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Berkeley+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Fallback if Berkeley Mono not available -->
+  <style>
+    @font-face {
+      font-family: 'Berkeley Mono';
+      src: local('Berkeley Mono'), local('JetBrains Mono'), local('SF Mono'), local('Consolas');
+    }
+  </style>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- D3.js -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#hero" class="nav-logo">FIFA World Cup 1930-2022</a>
+      <ul class="nav-links">
+        <li><a href="#hero">Overview</a></li>
+        <li><a href="#timeline">Timeline</a></li>
+        <li><a href="#dominance">Dynasties</a></li>
+        <li><a href="#goals">Goals</a></li>
+        <li><a href="#upsets">Upsets</a></li>
+        <li><a href="#hosts">Hosts</a></li>
+        <li><a href="#rivalries">Rivalries</a></li>
+        <li><a href="#finals">Finals</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Spacer for fixed nav -->
+  <div style="height: 60px;"></div>
+
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="container">
+      <!-- Content loaded by hero.js -->
+    </div>
+  </section>
+
+  <!-- Timeline Section -->
+  <section id="timeline">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-number">01</div>
+        <h2 class="section-title">Tournament Evolution</h2>
+        <p class="section-subtitle">From 13 teams in Uruguay to 32 nations battling in Qatar</p>
+      </div>
+      <div class="chart-container" id="timeline-chart"></div>
+    </div>
+  </section>
+
+  <!-- Dominance Section -->
+  <section id="dominance">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-number">02</div>
+        <h2 class="section-title">The Dynasties</h2>
+        <p class="section-subtitle">Which nations dominated and when</p>
+      </div>
+      <div class="chart-container" id="dominance-chart"></div>
+    </div>
+  </section>
+
+  <!-- Goals Section -->
+  <section id="goals">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-number">03</div>
+        <h2 class="section-title">Scoring Patterns</h2>
+        <p class="section-subtitle">How goal-scoring has evolved over 92 years</p>
+      </div>
+      <div class="chart-container" id="goals-chart"></div>
+    </div>
+  </section>
+
+  <!-- Upsets Section -->
+  <section id="upsets">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-number">04</div>
+        <h2 class="section-title">Giant Killers</h2>
+        <p class="section-subtitle">The matches that shocked the world</p>
+      </div>
+      <div class="chart-container" id="upsets-chart"></div>
+    </div>
+  </section>
+
+  <!-- Hosts Section -->
+  <section id="hosts">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-number">05</div>
+        <h2 class="section-title">Home Advantage</h2>
+        <p class="section-subtitle">Does hosting the tournament help?</p>
+      </div>
+      <div class="chart-container" id="hosts-chart"></div>
+    </div>
+  </section>
+
+  <!-- Rivalries Section -->
+  <section id="rivalries">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-number">06</div>
+        <h2 class="section-title">The Rivalries</h2>
+        <p class="section-subtitle">Head-to-head battles across history</p>
+      </div>
+      <div class="chart-container" id="rivalries-chart"></div>
+    </div>
+  </section>
+
+  <!-- Finals Section -->
+  <section id="finals">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-number">07</div>
+        <h2 class="section-title">Final Showdowns</h2>
+        <p class="section-subtitle">22 finals, 92 years of drama</p>
+      </div>
+      <div class="chart-container" id="finals-chart"></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="padding: 40px 0; text-align: center; border-top: 1px solid var(--border);">
+    <div class="container">
+      <p class="label">Data: FIFA World Cup Matches 1930-2022</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/sections/hero.js"></script>
+  <script src="js/sections/timeline.js"></script>
+  <script src="js/sections/dominance.js"></script>
+  <script src="js/sections/goals.js"></script>
+  <script src="js/sections/upsets.js"></script>
+  <script src="js/sections/hosts.js"></script>
+  <script src="js/sections/rivalries.js"></script>
+  <script src="js/sections/finals.js"></script>
+
+  <script>
+    // Initialize all sections after DOM and data are loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof initHero === 'function') initHero();
+      if (typeof initTimeline === 'function') initTimeline();
+      if (typeof initDominance === 'function') initDominance();
+      if (typeof initGoals === 'function') initGoals();
+      if (typeof initUpsets === 'function') initUpsets();
+      if (typeof initHosts === 'function') initHosts();
+      if (typeof initRivalries === 'function') initRivalries();
+      if (typeof initFinals === 'function') initFinals();
+    });
+  </script>
+</body>
+</html>

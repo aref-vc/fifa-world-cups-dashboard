@@ -1,0 +1,372 @@
+/* FIFA World Cup Dashboard - Global Styles */
+
+/* ============================================
+   CSS Variables (Electric Dark Theme)
+   ============================================ */
+:root {
+  --font-family: 'Berkeley Mono', monospace;
+
+  /* Backgrounds */
+  --bg-main: #10100E;
+  --bg-main-rgb: 16, 16, 14;
+  --bg-elevated: #1A1A18;
+  --bg-elevated-rgb: 26, 26, 24;
+  --bg-accent: #242422;
+  --bg-accent-rgb: 36, 36, 34;
+
+  /* Text Colors */
+  --text-primary: #FFFFE3;
+  --text-primary-rgb: 255, 255, 227;
+  --text-secondary: #E6E6CE;
+  --text-secondary-rgb: 230, 230, 206;
+  --text-tertiary: #B3B3A3;
+  --text-tertiary-rgb: 179, 179, 163;
+
+  /* UI Colors */
+  --lime: #BEFF00;
+  --lime-rgb: 190, 255, 0;
+  --cyan: #00BAFE;
+  --cyan-rgb: 0, 186, 254;
+  --amber: #FFC000;
+  --amber-rgb: 255, 192, 0;
+  --emerald: #00DE71;
+  --emerald-rgb: 0, 222, 113;
+  --coral: #F04E50;
+  --coral-rgb: 240, 78, 80;
+
+  /* Borders */
+  --border: #2A2A28;
+  --border-rgb: 42, 42, 40;
+  --border-light: #3A3A38;
+  --border-light-rgb: 58, 58, 56;
+
+  /* Spacing */
+  --section-padding: 80px;
+  --container-max: 1400px;
+  --gap: 24px;
+}
+
+/* ============================================
+   Reset & Base
+   ============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--bg-main);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   Typography
+   ============================================ */
+h1, h2, h3, h4 {
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 3.5rem;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 2rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+  color: var(--text-tertiary);
+}
+
+p {
+  color: var(--text-secondary);
+  max-width: 65ch;
+}
+
+.label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
+}
+
+/* ============================================
+   Layout
+   ============================================ */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gap);
+}
+
+section {
+  padding: var(--section-padding) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+section:last-of-type {
+  border-bottom: none;
+}
+
+/* ============================================
+   Navigation (Sticky)
+   ============================================ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(var(--bg-main-rgb), 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 0;
+}
+
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-size: 0.875rem;
+  color: var(--lime);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--text-primary);
+}
+
+/* ============================================
+   Cards & Panels
+   ============================================ */
+.card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: var(--gap);
+}
+
+.card-highlight {
+  border-color: var(--lime);
+  box-shadow: 0 0 20px rgba(var(--lime-rgb), 0.1);
+}
+
+/* ============================================
+   Stat Cards
+   ============================================ */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--gap);
+}
+
+.stat-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 3rem;
+  font-weight: 400;
+  color: var(--lime);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
+}
+
+/* ============================================
+   Charts Container
+   ============================================ */
+.chart-container {
+  width: 100%;
+  min-height: 400px;
+  position: relative;
+}
+
+.chart-container svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ============================================
+   Tooltips
+   ============================================ */
+.tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: var(--bg-accent);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  padding: 12px 16px;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  z-index: 1001;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.tooltip.visible {
+  opacity: 1;
+}
+
+.tooltip-title {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.tooltip-value {
+  color: var(--lime);
+}
+
+/* ============================================
+   Section Headers
+   ============================================ */
+.section-header {
+  margin-bottom: 48px;
+}
+
+.section-number {
+  font-size: 0.75rem;
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  color: var(--text-tertiary);
+  max-width: 600px;
+}
+
+/* ============================================
+   Color Utilities
+   ============================================ */
+.text-lime { color: var(--lime); }
+.text-cyan { color: var(--cyan); }
+.text-amber { color: var(--amber); }
+.text-emerald { color: var(--emerald); }
+.text-coral { color: var(--coral); }
+
+.bg-lime { background-color: var(--lime); }
+.bg-cyan { background-color: var(--cyan); }
+.bg-amber { background-color: var(--amber); }
+.bg-emerald { background-color: var(--emerald); }
+.bg-coral { background-color: var(--coral); }
+
+/* ============================================
+   Animations
+   ============================================ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Stagger children */
+.stagger > * {
+  opacity: 0;
+}
+
+.stagger.animate > *:nth-child(1) { animation: fadeInUp 0.5s ease-out 0.1s forwards; }
+.stagger.animate > *:nth-child(2) { animation: fadeInUp 0.5s ease-out 0.2s forwards; }
+.stagger.animate > *:nth-child(3) { animation: fadeInUp 0.5s ease-out 0.3s forwards; }
+.stagger.animate > *:nth-child(4) { animation: fadeInUp 0.5s ease-out 0.4s forwards; }
+
+/* ============================================
+   Scrollbar
+   ============================================ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 768px) {
+  :root {
+    --section-padding: 48px;
+    --gap: 16px;
+  }
+
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 1.5rem; }
+
+  .stat-value { font-size: 2rem; }
+
+  .nav-links { display: none; }
+}
