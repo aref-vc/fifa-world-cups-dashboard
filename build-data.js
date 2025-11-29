@@ -139,8 +139,20 @@ const upsets = matches.filter(m => {
   description: `${m.winner} ${m.homeScore}-${m.awayScore} ${m.loser}`
 }));
 
-// Finals data
-const finals = matches.filter(m => m.isFinal);
+// Finals data with enriched fields
+const finals = matches.filter(m => m.isFinal).map(m => {
+  // Determine winner/loser scores
+  const winnerScore = m.winner === m.home ? m.homeScore : m.awayScore;
+  const loserScore = m.winner === m.home ? m.awayScore : m.homeScore;
+  return {
+    ...m,
+    winnerScore,
+    loserScore,
+    margin: winnerScore - loserScore,
+    extraTime: false, // Would need additional data to determine
+    penalties: winnerScore === loserScore // If scores equal but there's a winner, likely penalties
+  };
+});
 
 // Output
 const output = `// FIFA World Cup Dashboard - Data Module

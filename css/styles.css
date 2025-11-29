@@ -232,6 +232,18 @@ section:last-of-type {
   height: 100%;
 }
 
+/* Force Berkeley Mono on all SVG text */
+svg text {
+  font-family: 'Berkeley Mono', monospace !important;
+}
+
+/* Chart titles - bold uppercase */
+svg .chart-title {
+  font-weight: 600 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
 /* ============================================
    Tooltips
    ============================================ */

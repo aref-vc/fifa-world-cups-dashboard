@@ -188,31 +188,41 @@ function initTimeline() {
     .attr('font-size', '12px')
     .text('Avg Goals/Match');
 
-  // Legend
-  const legend = g.append('g')
-    .attr('transform', `translate(${innerWidth - 150}, -20)`);
+  // Chart title - bold uppercase
+  svg.append('text')
+    .attr('class', 'chart-title')
+    .attr('x', width / 2)
+    .attr('y', 20)
+    .attr('text-anchor', 'middle')
+    .attr('fill', Utils.colors.textSecondary)
+    .attr('font-size', '14px')
+    .attr('font-weight', '600')
+    .text('TOURNAMENT EVOLUTION (1930-2022)');
 
-  legend.append('line')
-    .attr('x1', 0).attr('x2', 20)
-    .attr('y1', 0).attr('y2', 0)
-    .attr('stroke', Utils.colors.cyan)
-    .attr('stroke-width', 2);
+  // Legend - bottom center with circles
+  const legend = svg.append('g')
+    .attr('transform', `translate(${width / 2 - 80}, ${height - 15})`);
+
+  legend.append('circle')
+    .attr('cx', 0)
+    .attr('cy', 0)
+    .attr('r', 5)
+    .attr('fill', Utils.colors.cyan);
 
   legend.append('text')
-    .attr('x', 28).attr('y', 4)
+    .attr('x', 12).attr('y', 4)
     .attr('fill', Utils.colors.textSecondary)
     .attr('font-size', '11px')
     .text('Matches');
 
-  legend.append('line')
-    .attr('x1', 0).attr('x2', 20)
-    .attr('y1', 20).attr('y2', 20)
-    .attr('stroke', Utils.colors.lime)
-    .attr('stroke-width', 2)
-    .attr('stroke-dasharray', '6,4');
+  legend.append('circle')
+    .attr('cx', 90)
+    .attr('cy', 0)
+    .attr('r', 5)
+    .attr('fill', Utils.colors.lime);
 
   legend.append('text')
-    .attr('x', 28).attr('y', 24)
+    .attr('x', 102).attr('y', 4)
     .attr('fill', Utils.colors.textSecondary)
     .attr('font-size', '11px')
     .text('Avg Goals');

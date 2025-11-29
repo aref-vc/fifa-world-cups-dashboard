@@ -108,14 +108,16 @@ function initUpsets() {
   const g = svg.append('g')
     .attr('transform', `translate(${margin.left},${margin.top})`);
 
-  // Title
+  // Title - bold uppercase
   svg.append('text')
+    .attr('class', 'chart-title')
     .attr('x', width / 2)
     .attr('y', 20)
     .attr('text-anchor', 'middle')
     .attr('fill', Utils.colors.textSecondary)
     .attr('font-size', '14px')
-    .text('Top 15 Giant-Killing Victories');
+    .attr('font-weight', '600')
+    .text('TOP 15 GIANT-KILLING VICTORIES');
 
   // Scales
   const x = d3.scaleLinear()
@@ -197,20 +199,20 @@ function initUpsets() {
     .attr('r', 4)
     .attr('fill', Utils.colors.cyan);
 
-  // Legend
+  // Legend - bottom center with circle
   const legend = svg.append('g')
-    .attr('transform', `translate(${margin.left}, ${height - 10})`);
+    .attr('transform', `translate(${width / 2 - 60}, ${height - 10})`);
 
   legend.append('circle')
     .attr('cx', 0)
     .attr('cy', 0)
-    .attr('r', 4)
+    .attr('r', 5)
     .attr('fill', Utils.colors.cyan);
 
   legend.append('text')
-    .attr('x', 10)
+    .attr('x', 12)
     .attr('y', 4)
     .attr('fill', Utils.colors.textTertiary)
-    .attr('font-size', '10px')
+    .attr('font-size', '11px')
     .text('Knockout stage upset');
 }

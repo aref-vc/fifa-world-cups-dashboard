@@ -10,7 +10,7 @@ function initHero() {
       <h1 style="font-size: 4rem; margin-bottom: 16px;">
         <span style="color: var(--lime);">92 Years</span> of World Cup History
       </h1>
-      <p style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 60px;">
+      <p style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 60px; text-align: center;">
         From Montevideo 1930 to Lusail 2022
       </p>
 

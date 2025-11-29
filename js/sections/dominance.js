@@ -170,35 +170,37 @@ function initDominance() {
     .attr('stroke', Utils.colors.border)
     .attr('stroke-opacity', 0.3);
 
-  // Legend on right
-  const legend = g.append('g')
-    .attr('transform', `translate(${innerWidth + 20}, 0)`);
+  // Chart title - bold uppercase
+  svg.append('text')
+    .attr('class', 'chart-title')
+    .attr('x', width / 2)
+    .attr('y', 20)
+    .attr('text-anchor', 'middle')
+    .attr('fill', Utils.colors.textSecondary)
+    .attr('font-size', '14px')
+    .attr('font-weight', '600')
+    .text('DYNASTY RANKINGS (TOP 10 NATIONS ALL-TIME)');
+
+  // Legend - bottom center with circles
+  const legend = svg.append('g')
+    .attr('transform', `translate(${width / 2 - (topTeams.length * 60) / 2}, ${height - 15})`);
 
   topTeams.forEach((team, i) => {
     const totalWins = teamTotalWins[team];
     const legendItem = legend.append('g')
-      .attr('transform', `translate(0, ${i * 28})`);
+      .attr('transform', `translate(${i * 120}, 0)`);
 
-    legendItem.append('rect')
-      .attr('width', 16)
-      .attr('height', 16)
-      .attr('rx', 3)
+    legendItem.append('circle')
+      .attr('cx', 0)
+      .attr('cy', 0)
+      .attr('r', 5)
       .attr('fill', color(team));
 
     legendItem.append('text')
-      .attr('x', 24)
-      .attr('y', 12)
+      .attr('x', 10)
+      .attr('y', 4)
       .attr('fill', Utils.colors.textSecondary)
-      .attr('font-size', '11px')
+      .attr('font-size', '10px')
       .text(`${team} (${totalWins})`);
   });
-
-  // Title annotation
-  g.append('text')
-    .attr('x', innerWidth / 2)
-    .attr('y', -15)
-    .attr('text-anchor', 'middle')
-    .attr('fill', Utils.colors.textTertiary)
-    .attr('font-size', '12px')
-    .text('Ranking by match wins per tournament (Top 10 nations all-time)');
 }

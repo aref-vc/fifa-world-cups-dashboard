@@ -69,14 +69,16 @@ function initRivalries() {
     .attr('width', netWidth)
     .attr('height', netHeight);
 
-  // Title
+  // Title - bold uppercase
   netSvg.append('text')
+    .attr('class', 'chart-title')
     .attr('x', netWidth / 2)
     .attr('y', 20)
     .attr('text-anchor', 'middle')
     .attr('fill', Utils.colors.textSecondary)
     .attr('font-size', '14px')
-    .text('Rivalry Network (Top 20 matchups)');
+    .attr('font-weight', '600')
+    .text('RIVALRY NETWORK (TOP 20 MATCHUPS)');
 
   const netG = netSvg.append('g')
     .attr('transform', 'translate(0, 30)');

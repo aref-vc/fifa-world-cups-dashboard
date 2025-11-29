@@ -69,14 +69,16 @@ function initHosts() {
   const g = svg.append('g')
     .attr('transform', `translate(${margin.left},${margin.top})`);
 
-  // Title
+  // Title - bold uppercase
   svg.append('text')
+    .attr('class', 'chart-title')
     .attr('x', width / 2)
     .attr('y', 25)
     .attr('text-anchor', 'middle')
     .attr('fill', Utils.colors.textSecondary)
     .attr('font-size', '14px')
-    .text('Host Nation Performance by Tournament');
+    .attr('font-weight', '600')
+    .text('HOST NATION PERFORMANCE BY TOURNAMENT');
 
   // Scales
   const y = d3.scaleBand()
@@ -222,26 +224,26 @@ function initHosts() {
     .attr('font-size', '11px')
     .text('Matches');
 
-  // Legend
-  const legend = svg.append('g')
-    .attr('transform', `translate(${width - 200}, 50)`);
-
+  // Legend - bottom center with circles
   const legendItems = [
     { color: Utils.colors.lime, label: 'Won Tournament' },
     { color: Utils.colors.cyan, label: 'Host Wins' },
     { color: Utils.colors.textTertiary, label: 'Matches Played' }
   ];
 
+  const legend = svg.append('g')
+    .attr('transform', `translate(${width / 2 - 150}, ${height - 15})`);
+
   legendItems.forEach((item, i) => {
     legend.append('circle')
-      .attr('cx', 0)
-      .attr('cy', i * 20)
+      .attr('cx', i * 110)
+      .attr('cy', 0)
       .attr('r', 5)
       .attr('fill', item.color);
 
     legend.append('text')
-      .attr('x', 12)
-      .attr('y', i * 20 + 4)
+      .attr('x', i * 110 + 12)
+      .attr('y', 4)
       .attr('fill', Utils.colors.textSecondary)
       .attr('font-size', '11px')
       .text(item.label);

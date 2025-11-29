@@ -36,14 +36,16 @@ function initFinals() {
   const tlG = tlSvg.append('g')
     .attr('transform', `translate(${tlMargin.left},${tlMargin.top})`);
 
-  // Title
+  // Title - bold uppercase
   tlSvg.append('text')
+    .attr('class', 'chart-title')
     .attr('x', tlWidth / 2)
     .attr('y', 20)
     .attr('text-anchor', 'middle')
     .attr('fill', Utils.colors.textSecondary)
     .attr('font-size', '14px')
-    .text('World Cup Finals Timeline (1930-2022)');
+    .attr('font-weight', '600')
+    .text('WORLD CUP FINALS TIMELINE (1930-2022)');
 
   // X scale for years
   const xTl = d3.scalePoint()
@@ -149,35 +151,34 @@ function initFinals() {
       Utils.hideTooltip();
     });
 
-  // Legend
+  // Legend - bottom center with circles
   const tlLegend = tlSvg.append('g')
-    .attr('transform', `translate(${tlWidth - 150}, ${tlHeight - 25})`);
+    .attr('transform', `translate(${tlWidth / 2 - 70}, ${tlHeight - 15})`);
 
-  tlLegend.append('rect')
-    .attr('width', 12)
-    .attr('height', 12)
-    .attr('fill', Utils.colors.lime)
-    .attr('rx', 2);
+  tlLegend.append('circle')
+    .attr('cx', 0)
+    .attr('cy', 0)
+    .attr('r', 5)
+    .attr('fill', Utils.colors.lime);
 
   tlLegend.append('text')
-    .attr('x', 18)
-    .attr('y', 10)
+    .attr('x', 12)
+    .attr('y', 4)
     .attr('fill', Utils.colors.textTertiary)
-    .attr('font-size', '10px')
+    .attr('font-size', '11px')
     .text('Winner');
 
-  tlLegend.append('rect')
-    .attr('x', 70)
-    .attr('width', 12)
-    .attr('height', 12)
-    .attr('fill', Utils.colors.coral)
-    .attr('rx', 2);
+  tlLegend.append('circle')
+    .attr('cx', 80)
+    .attr('cy', 0)
+    .attr('r', 5)
+    .attr('fill', Utils.colors.coral);
 
   tlLegend.append('text')
-    .attr('x', 88)
-    .attr('y', 10)
+    .attr('x', 92)
+    .attr('y', 4)
     .attr('fill', Utils.colors.textTertiary)
-    .attr('font-size', '10px')
+    .attr('font-size', '11px')
     .text('Runner-up');
 
   // ============================================
@@ -210,14 +211,16 @@ function initFinals() {
   const scG = scSvg.append('g')
     .attr('transform', `translate(${scMargin.left},${scMargin.top})`);
 
-  // Title
+  // Title - bold uppercase
   scSvg.append('text')
+    .attr('class', 'chart-title')
     .attr('x', scWidth / 2)
     .attr('y', 20)
     .attr('text-anchor', 'middle')
     .attr('fill', Utils.colors.textSecondary)
     .attr('font-size', '14px')
-    .text('Final Competitiveness');
+    .attr('font-weight', '600')
+    .text('FINAL COMPETITIVENESS');
 
   // Scales
   const xSc = d3.scaleLinear()
@@ -329,26 +332,26 @@ function initFinals() {
     .attr('font-size', '11px')
     .text('Victory Margin');
 
-  // Scatter legend
-  const scLegend = scSvg.append('g')
-    .attr('transform', `translate(${scMargin.left + 10}, ${scMargin.top + 10})`);
-
+  // Scatter legend - bottom center with circles
   const legendItems = [
     { color: Utils.colors.emerald, label: '1-goal margin' },
     { color: Utils.colors.coral, label: '2+ goal margin' },
     { color: Utils.colors.amber, label: 'Penalties' }
   ];
 
+  const scLegend = scSvg.append('g')
+    .attr('transform', `translate(${scWidth / 2 - 120}, ${scHeight - 10})`);
+
   legendItems.forEach((item, i) => {
     scLegend.append('circle')
-      .attr('cx', 0)
-      .attr('cy', i * 18)
+      .attr('cx', i * 90)
+      .attr('cy', 0)
       .attr('r', 5)
       .attr('fill', item.color);
 
     scLegend.append('text')
-      .attr('x', 12)
-      .attr('y', i * 18 + 4)
+      .attr('x', i * 90 + 10)
+      .attr('y', 4)
       .attr('fill', Utils.colors.textTertiary)
       .attr('font-size', '10px')
       .text(item.label);
@@ -377,14 +380,15 @@ function initFinals() {
   const highestScoring = [...finals].sort((a, b) => b.totalGoals - a.totalGoals)[0];
   const penaltyFinals = finals.filter(f => f.penalties);
   const mostRecent = finals[finals.length - 1];
-  const closestNonPenalty = finals.filter(f => !f.penalties && f.margin === 1).slice(-1)[0];
+  const closestNonPenalty = finals.filter(f => !f.penalties && f.margin === 1);
+  const biggestMargin = [...finals].sort((a, b) => b.margin - a.margin)[0];
 
   const memorableFinals = [
     { final: mostRecent, tag: 'Most Recent' },
     { final: highestScoring, tag: 'Highest Scoring' },
-    { final: penaltyFinals[penaltyFinals.length - 1], tag: 'Latest Penalty Shootout' },
-    { final: closestNonPenalty, tag: 'Closest Contest' }
-  ].filter(f => f.final);
+    penaltyFinals.length > 0 ? { final: penaltyFinals[penaltyFinals.length - 1], tag: 'Latest Penalty Shootout' } : null,
+    closestNonPenalty.length > 0 ? { final: closestNonPenalty[closestNonPenalty.length - 1], tag: 'Closest Contest' } : { final: biggestMargin, tag: 'Biggest Margin' }
+  ].filter(f => f && f.final);
 
   memorableFinals.forEach(({ final, tag }) => {
     const card = document.createElement('div');

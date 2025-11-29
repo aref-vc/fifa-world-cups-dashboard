@@ -140,14 +140,16 @@ function initGoals() {
 
   yHeatAxis.selectAll('line, path').attr('stroke', Utils.colors.border);
 
-  // Title
+  // Title - bold uppercase
   heatSvg.append('text')
+    .attr('class', 'chart-title')
     .attr('x', heatWidth / 2)
     .attr('y', 25)
     .attr('text-anchor', 'middle')
     .attr('fill', Utils.colors.textSecondary)
     .attr('font-size', '14px')
-    .text('Avg Goals by Decade & Stage');
+    .attr('font-weight', '600')
+    .text('AVG GOALS BY DECADE & STAGE');
 
   // ============================================
   // LOLLIPOP: Highest Scoring Matches
@@ -246,12 +248,14 @@ function initGoals() {
     .attr('font-size', '11px')
     .text(d => `${d.home} vs ${d.away} (${d.year})`);
 
-  // Title
+  // Title - bold uppercase
   lolliSvg.append('text')
+    .attr('class', 'chart-title')
     .attr('x', lolliWidth / 2)
     .attr('y', 25)
     .attr('text-anchor', 'middle')
     .attr('fill', Utils.colors.textSecondary)
     .attr('font-size', '14px')
-    .text('Highest Scoring Matches');
+    .attr('font-weight', '600')
+    .text('HIGHEST SCORING MATCHES');
 }

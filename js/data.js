@@ -21002,7 +21002,12 @@ const DATA = {
     "isDraw": false,
     "decade": 1930,
     "isKnockout": true,
-    "isFinal": true
+    "isFinal": true,
+    "winnerScore": 4,
+    "loserScore": 2,
+    "margin": 2,
+    "extraTime": false,
+    "penalties": false
   },
   {
     "id": 35,
@@ -21020,7 +21025,12 @@ const DATA = {
     "isDraw": false,
     "decade": 1930,
     "isKnockout": true,
-    "isFinal": true
+    "isFinal": true,
+    "winnerScore": 2,
+    "loserScore": 1,
+    "margin": 1,
+    "extraTime": false,
+    "penalties": false
   },
   {
     "id": 53,
@@ -21038,7 +21048,12 @@ const DATA = {
     "isDraw": false,
     "decade": 1930,
     "isKnockout": true,
-    "isFinal": true
+    "isFinal": true,
+    "winnerScore": 4,
+    "loserScore": 2,
+    "margin": 2,
+    "extraTime": false,
+    "penalties": false
   },
   {
     "id": 101,
@@ -21056,7 +21071,12 @@ const DATA = {
     "isDraw": false,
     "decade": 1950,
     "isKnockout": true,
-    "isFinal": true
+    "isFinal": true,
+    "winnerScore": 3,
+    "loserScore": 2,
+    "margin": 1,
+    "extraTime": false,
+    "penalties": false
   },
   {
     "id": 136,
@@ -21074,7 +21094,12 @@ const DATA = {
     "isDraw": false,
     "decade": 1950,
     "isKnockout": true,
-    "isFinal": true
+    "isFinal": true,
+    "winnerScore": 5,
+    "loserScore": 2,
+    "margin": 3,
+    "extraTime": false,
+    "penalties": false
   },
   {
     "id": 168,
@@ -21092,7 +21117,12 @@ const DATA = {
     "isDraw": false,
     "decade": 1960,
     "isKnockout": true,
-    "isFinal": true
+    "isFinal": true,
+    "winnerScore": 3,
+    "loserScore": 1,
+    "margin": 2,
+    "extraTime": false,
+    "penalties": false
   },
   {
     "id": 200,
@@ -21110,7 +21140,12 @@ const DATA = {
     "isDraw": false,
     "decade": 1960,
     "isKnockout": true,
-    "isFinal": true
+    "isFinal": true,
+    "winnerScore": 4,
+    "loserScore": 2,
+    "margin": 2,
+    "extraTime": false,
+    "penalties": false
   },
   {
     "id": 232,
@@ -21128,7 +21163,12 @@ const DATA = {
     "isDraw": false,
     "decade": 1970,
     "isKnockout": true,
-    "isFinal": true
+    "isFinal": true,
+    "winnerScore": 4,
+    "loserScore": 1,
+    "margin": 3,
+    "extraTime": false,
+    "penalties": false
   },
   {
     "id": 270,
@@ -21146,7 +21186,12 @@ const DATA = {
     "isDraw": false,
     "decade": 1970,
     "isKnockout": true,
-    "isFinal": true
+    "isFinal": true,
+    "winnerScore": 2,
+    "loserScore": 1,
+    "margin": 1,
+    "extraTime": false,
+    "penalties": false
   },
   {
     "id": 308,
@@ -21164,7 +21209,12 @@ const DATA = {
     "isDraw": false,
     "decade": 1970,
     "isKnockout": true,
-    "isFinal": true
+    "isFinal": true,
+    "winnerScore": 3,
+    "loserScore": 1,
+    "margin": 2,
+    "extraTime": false,
+    "penalties": false
   },
   {
     "id": 360,
@@ -21182,7 +21232,12 @@ const DATA = {
     "isDraw": false,
     "decade": 1980,
     "isKnockout": true,
-    "isFinal": true
+    "isFinal": true,
+    "winnerScore": 3,
+    "loserScore": 1,
+    "margin": 2,
+    "extraTime": false,
+    "penalties": false
   },
   {
     "id": 412,
@@ -21200,7 +21255,12 @@ const DATA = {
     "isDraw": false,
     "decade": 1980,
     "isKnockout": true,
-    "isFinal": true
+    "isFinal": true,
+    "winnerScore": 3,
+    "loserScore": 2,
+    "margin": 1,
+    "extraTime": false,
+    "penalties": false
   },
   {
     "id": 464,
@@ -21218,7 +21278,12 @@ const DATA = {
     "isDraw": false,
     "decade": 1990,
     "isKnockout": true,
-    "isFinal": true
+    "isFinal": true,
+    "winnerScore": 1,
+    "loserScore": 0,
+    "margin": 1,
+    "extraTime": false,
+    "penalties": false
   },
   {
     "id": 516,
@@ -21236,7 +21301,12 @@ const DATA = {
     "isDraw": false,
     "decade": 1990,
     "isKnockout": true,
-    "isFinal": true
+    "isFinal": true,
+    "winnerScore": 0,
+    "loserScore": 0,
+    "margin": 0,
+    "extraTime": false,
+    "penalties": true
   },
   {
     "id": 580,
@@ -21254,7 +21324,12 @@ const DATA = {
     "isDraw": false,
     "decade": 1990,
     "isKnockout": true,
-    "isFinal": true
+    "isFinal": true,
+    "winnerScore": 3,
+    "loserScore": 0,
+    "margin": 3,
+    "extraTime": false,
+    "penalties": false
   },
   {
     "id": 644,
@@ -21272,7 +21347,12 @@ const DATA = {
     "isDraw": false,
     "decade": 2000,
     "isKnockout": true,
-    "isFinal": true
+    "isFinal": true,
+    "winnerScore": 2,
+    "loserScore": 0,
+    "margin": 2,
+    "extraTime": false,
+    "penalties": false
   },
   {
     "id": 708,
@@ -21290,7 +21370,12 @@ const DATA = {
     "isDraw": false,
     "decade": 2000,
     "isKnockout": true,
-    "isFinal": true
+    "isFinal": true,
+    "winnerScore": 1,
+    "loserScore": 1,
+    "margin": 0,
+    "extraTime": false,
+    "penalties": true
   },
   {
     "id": 772,
@@ -21308,7 +21393,12 @@ const DATA = {
     "isDraw": false,
     "decade": 2010,
     "isKnockout": true,
-    "isFinal": true
+    "isFinal": true,
+    "winnerScore": 1,
+    "loserScore": 0,
+    "margin": 1,
+    "extraTime": false,
+    "penalties": false
   },
   {
     "id": 836,
@@ -21326,7 +21416,12 @@ const DATA = {
     "isDraw": false,
     "decade": 2010,
     "isKnockout": true,
-    "isFinal": true
+    "isFinal": true,
+    "winnerScore": 1,
+    "loserScore": 0,
+    "margin": 1,
+    "extraTime": false,
+    "penalties": false
   },
   {
     "id": 900,
@@ -21344,7 +21439,12 @@ const DATA = {
     "isDraw": false,
     "decade": 2010,
     "isKnockout": true,
-    "isFinal": true
+    "isFinal": true,
+    "winnerScore": 4,
+    "loserScore": 2,
+    "margin": 2,
+    "extraTime": false,
+    "penalties": false
   },
   {
     "id": 964,
@@ -21362,7 +21462,12 @@ const DATA = {
     "isDraw": false,
     "decade": 2020,
     "isKnockout": true,
-    "isFinal": true
+    "isFinal": true,
+    "winnerScore": 3,
+    "loserScore": 3,
+    "margin": 0,
+    "extraTime": false,
+    "penalties": true
   }
 ],
 
