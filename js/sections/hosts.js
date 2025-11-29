@@ -56,8 +56,8 @@ function initHosts() {
   wrapper.appendChild(chartContainer);
 
   const width = container.clientWidth || 1200;
-  const height = 500;
-  const margin = { top: 60, right: 40, bottom: 40, left: 120 };
+  const height = 700;
+  const margin = { top: 60, right: 40, bottom: 80, left: 130 };
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
@@ -218,7 +218,7 @@ function initHosts() {
   // X Axis label
   svg.append('text')
     .attr('x', width / 2)
-    .attr('y', height - 5)
+    .attr('y', margin.top + innerHeight + 35)
     .attr('text-anchor', 'middle')
     .attr('fill', Utils.colors.textTertiary)
     .attr('font-size', '11px')
@@ -232,17 +232,17 @@ function initHosts() {
   ];
 
   const legend = svg.append('g')
-    .attr('transform', `translate(${width / 2 - 150}, ${height - 15})`);
+    .attr('transform', `translate(${width / 2 - 170}, ${height - 25})`);
 
   legendItems.forEach((item, i) => {
     legend.append('circle')
-      .attr('cx', i * 110)
+      .attr('cx', i * 120)
       .attr('cy', 0)
       .attr('r', 5)
       .attr('fill', item.color);
 
     legend.append('text')
-      .attr('x', i * 110 + 12)
+      .attr('x', i * 120 + 12)
       .attr('y', 4)
       .attr('fill', Utils.colors.textSecondary)
       .attr('font-size', '11px')
