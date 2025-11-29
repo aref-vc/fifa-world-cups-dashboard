@@ -57,8 +57,8 @@ function initDominance() {
 
   // Dimensions
   const width = container.clientWidth || 1200;
-  const height = 600;
-  const margin = { top: 40, right: 40, bottom: 100, left: 60 };
+  const height = 650;
+  const margin = { top: 40, right: 40, bottom: 120, left: 60 };
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
@@ -188,7 +188,7 @@ function initDominance() {
   const legendWidth = itemsPerRow * itemWidth;
 
   const legend = svg.append('g')
-    .attr('transform', `translate(${(width - legendWidth) / 2}, ${height - 55})`);
+    .attr('transform', `translate(${(width - legendWidth) / 2}, ${height - 65})`);
 
   topTeams.forEach((team, i) => {
     const totalWins = teamTotalWins[team];
